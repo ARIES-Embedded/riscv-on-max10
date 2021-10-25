@@ -1,0 +1,120 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2020  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
+# Date created = 16:47:34  Oktober 25, 2021
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		Spider_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M08SAU169C8G
+set_global_assignment -name TOP_LEVEL_ENTITY Spider
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:47:34  OKTOBER 25, 2021"
+set_global_assignment -name LAST_QUARTUS_VERSION "20.1.0 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name QSYS_FILE qsys0.qsys
+set_global_assignment -name VHDL_FILE Spider.vhd
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
+set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "12.5 %"
+
+# Obsolete assignment in <Version 19.3> "set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top"
+# Obsolete assignment in <Version 19.3> "set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top"
+# Obsolete assignment in <Version 19.3> "set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top"
+set_location_assignment PIN_B7 -to button[1]
+set_location_assignment PIN_A5 -to button[0]
+set_location_assignment PIN_H4 -to clk25
+set_location_assignment PIN_L1 -to led_base[1]
+set_location_assignment PIN_L2 -to led_base[0]
+set_location_assignment PIN_C9 -to pmod_j2[7]
+set_location_assignment PIN_C10 -to pmod_j2[6]
+set_location_assignment PIN_E12 -to pmod_j2[5]
+set_location_assignment PIN_F12 -to pmod_j2[4]
+set_location_assignment PIN_A8 -to pmod_j2[3]
+set_location_assignment PIN_A9 -to pmod_j2[2]
+set_location_assignment PIN_A10 -to pmod_j2[1]
+set_location_assignment PIN_A11 -to pmod_j2[0]
+set_location_assignment PIN_J2 -to pmod_j3[7]
+set_location_assignment PIN_J1 -to pmod_j3[6]
+set_location_assignment PIN_F10 -to pmod_j3[5]
+set_location_assignment PIN_F9 -to pmod_j3[4]
+set_location_assignment PIN_K2 -to pmod_j3[3]
+set_location_assignment PIN_K1 -to pmod_j3[2]
+set_location_assignment PIN_B2 -to pmod_j3[1]
+set_location_assignment PIN_A2 -to pmod_j3[0]
+set_location_assignment PIN_L5 -to pmod_j4[7]
+set_location_assignment PIN_L4 -to pmod_j4[6]
+set_location_assignment PIN_M3 -to pmod_j4[5]
+set_location_assignment PIN_L3 -to pmod_j4[4]
+set_location_assignment PIN_M5 -to pmod_j4[3]
+set_location_assignment PIN_M4 -to pmod_j4[2]
+set_location_assignment PIN_M2 -to pmod_j4[1]
+set_location_assignment PIN_M1 -to pmod_j4[0]
+set_location_assignment PIN_K5 -to pmod_j5[7]
+set_location_assignment PIN_J5 -to pmod_j5[6]
+set_location_assignment PIN_M11 -to pmod_j5[5]
+set_location_assignment PIN_L11 -to pmod_j5[4]
+set_location_assignment PIN_N4 -to pmod_j5[3]
+set_location_assignment PIN_N5 -to pmod_j5[2]
+set_location_assignment PIN_J8 -to pmod_j5[1]
+set_location_assignment PIN_K8 -to pmod_j5[0]
+set_location_assignment PIN_B9 -to resetn
+set_location_assignment PIN_F4 -to uart_rx
+set_location_assignment PIN_G4 -to uart_tx
+set_location_assignment PIN_D6 -to led_module[0]
+set_location_assignment PIN_C5 -to led_module[1]
+
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name EXTERNAL_FLASH_FALLBACK_ADDRESS 00000000
+set_global_assignment -name INTERNAL_FLASH_UPDATE_MODE "SINGLE IMAGE WITH ERAM"
+set_global_assignment -name GENERATE_SVF_FILE ON
+
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

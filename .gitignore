@@ -1,0 +1,16 @@
+#
+.vscode/
+
+# c firmware
+out/
+.obj
+
+# quartus
+.qsys_edit/
+db/
+incremental_db/
+output_files/
+qsys0/
+bootrom.mif
+*.sopcinfo
+*.qws
