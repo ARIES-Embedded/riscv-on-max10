@@ -19,10 +19,10 @@ This guide shows how to get the RISC-V demos running on the SpiderSoM and MX10.
 - USB Blaster or OpenOCD
 - SpiderSoM-S, MX10-S8 or MX10-U
 
-## 3. Prebuild Demo Files
+## 3. Programming The Demos
 
 The repository contains prebuild FPGA programming and bootrom images in the folder **Prebuild/**  
-These can be used to skip chapters **#4** and **#5**.
+These can be used to skip sections **#4** and **#5**.
 
 ### FPGA Programming Files
 
@@ -33,15 +33,15 @@ The programming files include **.sof** files that target the SRAM. These are qui
 OpenOCD can be used to program the FPGA via the PIC MCU using the **.svf** files.  
 A **\*.svf** file is equivalent to a **\*.sof** file and a **\*.pof.svf** file is equivalent to a **\*.pof** file.
 
-### Programming via OpenOCD
+### Programming Via OpenOCD
 
-See [SpiderWiki: Installing OpenOCD](https://TODO) for installation instructions.  
+See [SpiderWiki: Installing OpenOCD](http://www.spiderboard.org/index.php?title=Installing_OpenOCD) for installation instructions.  
 To program the FPGA open the prebuild images folder in a terminal and use the **mx10spider_prog** command with the respective **.svf** file.
 
-	# Programming .sof on SpiderSoM as Example
+	# Programming .sof on SpiderSoM as example
 	mx10spider_prog Spider_S8.svf
 
-### Programming via USB-Blaster
+### Programming Via USB-Blaster
 
 To program an image via the USB-Blaster, start Quartus Prime and open the Programmer. Under **Hardware Setup** select the USB-Blaster and then click on **Add File** and select the respective **.sof** or **.pof** file. Finally press **Start**.
 
@@ -52,7 +52,7 @@ To build the Quartus Prime project the memory initalization file **bootrom.mif**
 Example:
 
 	# Using the SpiderSoM
-	cp Prebuild/bootrom_Spider_S.mif Spider_S/bootrom.mif
+	cp Prebuild/Spider_S_RiscvSimple_bootrom.mif Spider_S/bootrom.mif
 
 ## 4. Building The Firmware
 
@@ -84,16 +84,7 @@ Now the buildtools are available via:
 
 	riscv64-unknown-elf-(*)  
 
-### Building the firmware
+### Building The Firmware
 
 To build the firmware head to the FPGA project folder and then to either **RiscvSimple/** or **RiscvFreertos/**. There use the **make** command. If the build is successful, the output files will be in the subfolder **out/**. Finally copy the **out/bootrom.mif** file to the FPGA project folder.
 From there Quartus Prime will initialize the on-chip RAM will the bootrom image. 
-
-## 5. FPGA & RISC-V Demo
-
-Description of FPGA?
-The RISC-V demos do something?
-
-## 6 Programming The FPGA
-
-Is this chapter needed or merge into #3 Prebuild Demo Files?
