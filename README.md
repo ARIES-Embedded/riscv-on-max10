@@ -8,7 +8,7 @@
 5. License
 
 ## 1. Introduction
-This repository provides demo files for the SpiderSoM (S) and MX10 (S8, U) showcasing RISC-V softcores on MAX10. They can also be used as starting point for development. The demos implement a LED binary counter on Pmod J2 and UART loopback per interrupt through the PIC-MCU on the SoM. A guide to run the examples can be found in GettingStarted.md or on the [SpiderWiki](http://www.spiderboard.org/index.php?title=RISC-V_%26_FreeRTOS).
+This repository provides demo files for the SpiderSoM (S) and MX10 (S8, U) showcasing RISC-V softcores on MAX10. They can also be used as starting point for development. The demos implement a LED binary counter on Pmod J2 and UART loopback per interrupt through the PIC-MCU on the SoM. A guide to run the examples can be found in [GettingStarted](GettingStarted.md) or on the [SpiderWiki](http://www.spiderboard.org/index.php?title=RISC-V_%26_FreeRTOS).
 
 ## 2. Project Structure
 **Spider_S/** contains the Quartus Prime project for the SpiderSoM-S (10M08).  
