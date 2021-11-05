@@ -83,26 +83,22 @@ uintptr_t Hal_Exception(uintptr_t stack, uintptr_t addr, uint32_t mcause) {
 		UartWrite(g_Uart, "    mbadaddr ");
 		UartWriteHex32(g_Uart, read_csr(mbadaddr), true);
 		while(1);
-	}
-
-	// Warning! On interrupt mcause does not store flags but the cause bit number instead. (VexRiscv bug?)
-	// Example: On external interrupt (IRQ_M_EXT, 11) mcause is set to 0x80000011 instead of 0x80000800 (bit #11)
-	// Therefore Hal_Interrupt can only service one interrupt type at a time.
-
-	if ((mcause & 0xFF) == IRQ_M_EXT) {
-		uint32_t irq = g_InterruptController->pending & g_InterruptController->enabled;
-		for (uint32_t i = 0; i < 32; ++i) {
-			if ((irq & (1 << i)) && Hal_ExtIrqCallback[i]) {
-				Hal_ExtIrqCallback[i]();
+	} else {
+		if ((mcause & 0x7FFFFFFF) == IRQ_M_EXT) {
+			uint32_t irq = g_InterruptController->pending & g_InterruptController->enabled;
+			for (uint32_t i = 0; i < 32; ++i) {
+				if ((irq & (1 << i)) && Hal_ExtIrqCallback[i]) {
+					Hal_ExtIrqCallback[i]();
+				}
 			}
-		}
-	} else if ((mcause & 0xFF) == IRQ_M_TIMER) {
-		if (Hal_TimerIrqCallback) {
-			Hal_TimerIrqCallback();
-		}
-	} else if ((mcause & 0xFF) == IRQ_M_SOFT) {
-		if (Hal_SoftIrqCallback) {
-			Hal_SoftIrqCallback();
+		} else if ((mcause & 0x7FFFFFFF) == IRQ_M_TIMER) {
+			if (Hal_TimerIrqCallback) {
+				Hal_TimerIrqCallback();
+			}
+		} else if ((mcause & 0x7FFFFFFF) == IRQ_M_SOFT) {
+			if (Hal_SoftIrqCallback) {
+				Hal_SoftIrqCallback();
+			}
 		}
 	}
 
