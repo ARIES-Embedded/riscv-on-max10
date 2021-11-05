@@ -64,11 +64,9 @@ begin
 					when "0010" => ext_interrupt_enable <= avalon_writedata(C_INTERRUPTS-1 downto 0);
 					when "0110" => mtimecmp <= mtimecmp_latch & avalon_writedata;
 					when "0111" => mtimecmp_latch <= avalon_writedata(C_TIMER_HIGH_WIDTH-1 downto 0);
-					-- when "1000" => interrupt_pending(0) <= '0' when avalon_writedata = x"00000000" else '1';
 					when others => null;
 				end case;
 
-				-- conditional assigment while inside case statement possible?
 				if (avalon_address = "1000") then
 					if (avalon_writedata = x"00000000") then
 						interrupt_pending(0) <= '0';
