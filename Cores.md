@@ -3,7 +3,11 @@
 
 ## Interrupts
 
-Interrupts 0-2 are reserved for the core. Connecting an interrupt for this bit does not have any effect.
+Interrupt handling on PicoRV32 is non standard, yet simple.
+When an interrupt signal is active and the corresponding bit in the enable register *maskirq* is set, then the core is interrupted.
+The HAL provides functions to enable/disable interrupts in the *maskirq* register, to set interrupt handler callbacks and to start the timer (based on clock cycles).
+
+Interrupts 0-2 are reserved for the core. Connecting an interrupt for these bits may have side effects.
 
 | IRQ    | Description         |
 |--------|---------------------|
@@ -16,7 +20,12 @@ Interrupts 0-2 are reserved for the core. Connecting an interrupt for this bit d
 
 ## Interrupts
 
-Interrupts are managed by a custom interrupt controller and combined to the single interrupt input signal of Serv, which was previously used for a timer. On interrupt the HAL will query the interrupt controller for the status and call the corresponding IRQ handlers. Serv does not have a rdtime register built in, instead the mtime register of the interrupt controller can be used.
+Interrupts are managed by a custom interrupt controller and combined to the single interrupt input signal of Serv, which was previously used for a timer.
+Interrupts are enabled globally by setting the *mie*-bit in the *mstatus*-csr and the *mtie*-bit in the *mie*-csr.
+
+The core then is interrupted if a bit in both registers *menable* and *mpending* is set. The *IRQ_M_SOFT* bit of *mpending* is set if the register *softinterrupt* holds a value equal to nonzero. The *IRQ_M_TIMER* bit is asserted, if the value of *mtime* is greater than or equal to *mtimecmp*. The *IRQ_M_EXT* bit is set, if an external interrupt is asserted and the corresponding bit is set in *ext_enable*. 
+
+On interrupt the HAL will query the interrupt controller for the status and call the corresponding IRQ handlers. Serv does not have a rdtime register built in, instead the mtime register of the interrupt controller can be used. The HAL will also provide the neccessary functions for setting up the interrupts.
 
 The interrupt controller for the demo files is located at address **0x00010000**.
 
@@ -28,7 +37,7 @@ The interrupt controller for the demo files is located at address **0x00010000**
 | 0x04 | w_menable_clr | A bit set to '1' disables the corresponding machine interrupt. Available are IRQ_M_SOFT, IRQ_M_TIMER and IRQ_M_EXT. Bits written '0' are ignored. | W |
 |  | r_mpending | The core is interrupted when a machine interrupt is asserted and the r_menable bit is '1'. The corresponding r_mpending bit then is set to '1'. | R |
 | 0x08 | ext_enable | A bit set to '1' enables the external interrupt. | RW |
-| 0x0C | exp_pending | A bit set to '1' indicates that the external interrupt is asserted. If a bit in both ext_enable and ext_pending is '1', then the IRQ_M_EXT bit in r_mpending is asserted. | R |
+| 0x0C | ext_pending | A bit set to '1' indicates that the external interrupt is asserted. If a bit in both ext_enable and ext_pending is '1', then the IRQ_M_EXT bit in r_mpending is asserted. | R |
 | 0x10 | mtime | Lower 32 bits of the machine timer. When mtime is read, the actual value of mtimeh is loaded into its latch. The timer is initialized to 0 on reset or boot-up and incremented by 1 every clock cycle. | R |
 | 0x14 | mtimeh | Latched upper 32 to 1 bits of the machine timer. mtimeh cannot be read directly, instead reading returns the latched value from when mtime was read. This makes it possible to read a snapshot of the entire 64 to 33 bit timer without alteration. | R |
 | 0x18 | mtimecmp | Lower 32 bits of the timer compare-value. When mtimecmp is written to, the latched value of mtimecmph is written to the upper bits of the actual register. When the value of the entire mtime register is greater than or equal to the entire mtimecmp register, then the IRQ_M_SOFT bit is asserted in r_mpending. | RW |
@@ -39,7 +48,12 @@ The interrupt controller for the demo files is located at address **0x00010000**
 
 ## Interrupts
 
-Interrupts are managed by a custom interrupt controller that handles the signals external, software and timer interrupt of VexRiscv. On interrupt the HAL will query the interrupt controller for the status and call the corresponding IRQ handlers.
+Interrupts are managed by a custom interrupt controller and forwarded to VexRiscv via three interrupt signals.
+Interrupts are enabled globally by setting the *mie*-bit in the *mstatus*-csr.
+
+The core then is interrupted if a bit in the csr *mie* is set and the corresponding interrupt signal from the controller is asserted. The *IRQ_M_SOFT* signal is active if the register *softinterrupt* holds a value equal to nonzero. The *IRQ_M_TIMER* signal is asserted, if the value of *mtime* is greater than or equal to *mtimecmp*. The *IRQ_M_EXT* signal is active, if an external interrupt is asserted to the controller and the corresponding bit is set in the *enabled* register. 
+
+On external interrupt the HAL will query the interrupt controller for the status and call the corresponding IRQ handlers. The HAL will also provide the neccessary functions for setting up the interrupts.
 
 The interrupt controller for the demo files is located at address **0x00010000**.
 
