@@ -5,7 +5,7 @@
 2. Requirements
 3. Prebuild Demo Files
 4. Building The Firmware
-5. FPGA & RISC-V Demo
+5. Creating Quartus Programming Files
 
 ## 1. Introduction
 
@@ -31,7 +31,7 @@ The FPGA stores its configuration in the internal SRAM. The configuration is los
 The programming files include **.sof** files that target the SRAM. These are quickly to program and useful for testing and debugging. The **.pof** files target the FLASH. This image is retained when powered down and used for deploying.
 
 OpenOCD can be used to program the FPGA via the PIC MCU using the **.svf** files.  
-A **\*.svf** file is equivalent to a **\*.sof** file and a **\*.pof.svf** file is equivalent to a **\*.pof** file.
+A **\*.svf** file is equivalent to a **\*.sof** file and a **\*_pof.svf** file is equivalent to a **\*.pof** file.
 
 ### Programming Via OpenOCD
 
@@ -88,3 +88,39 @@ Now the buildtools are available via:
 
 To build the firmware head to the FPGA project folder and then to either **RiscvSimple/** or **RiscvFreertos/**. There use the **make** command. If the build is successful, the output files will be in the subfolder **out/**. Finally copy the **out/bootrom.mif** file to the FPGA project folder.
 From there Quartus Prime will initialize the on-chip RAM will the bootrom image. 
+
+## 5. Creating Quartus Programming Files
+
+With a valid bootrom image in the Quartus Project folder, start Quartus Prime and load the project. Press **Start Compilation**. If no errors occur the folder **output_files/** will be created with all programming files inside.
+Then the Quartus Programmer can be used as described in [Section 3](#3-Programming-The-Demos).
+
+### Converting **.sof/.pof** files into **.svf** files
+
+The Quartus Programmer can also be used to convert Quartus Programming Files (**.sof**, **.pof**) to the Serial Vector Format (**.svf**), which can be used by OpenOCD and the PIC-microcontroller to programm the FPGA. Start the Quartus Programmer and choose the correct programming file (**.sof** or **.pof**). Then select **File** -> **Create JAM, JBC, SVF or ISC File**. For the **File format** select **Serial Vector Format (.svf)** then press **OK**. The resulting **.svf** file will be created in the **output_files** folder.
+
+### Known Issue With .svf Files
+
+Programming the FPGA with a **.svf** that originated from a **.sof** programming file will erase the FLASH content of the FPGA. A workaround is to manually edit the **.svf** file:
+
+Remove all lines from the beginning of: (usually line 34)
+
+	!
+	!Max 10 Enable ISP
+	!
+
+including to the end of: (usually line 127):
+
+	!
+	!Max 10 Disable ISP
+	!
+	SIR 10 TDI (201);
+	RUNTEST 8750003 TCK;
+
+The part in the final **.svf** file should look like this:
+
+	TRST ABSENT;
+	ENDDR IDLE;
+	ENDIR IRPAUSE;
+	STATE IDLE;
+	SIR 10 TDI (002);
+	RUNTEST 2500000 TCK;
