@@ -78,7 +78,7 @@ __exception_vector__:
 	lw x21, 17 * 4(sp)
 	lw x22, 18 * 4(sp)
 	lw x23, 19 * 4(sp)
-	lw x24, 10 * 4(sp)
+	lw x24, 20 * 4(sp)
 	lw x25, 21 * 4(sp)
 	lw x26, 22 * 4(sp)
 	lw x27, 23 * 4(sp)
