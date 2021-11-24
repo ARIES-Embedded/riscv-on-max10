@@ -35,6 +35,7 @@ entity ServAvalon is
 		avalon_ic_read          : in std_logic;
 		avalon_ic_write         : in std_logic;
 		avalon_ic_writedata     : in std_logic_vector(31 downto 0);
+		avalon_ic_waitrequest   : out std_logic;
 		interrupts              : in std_logic_vector(7 downto 0)
 	);
 end entity ServAvalon;
@@ -99,6 +100,7 @@ architecture rtl of ServAvalon is
 			avalon_read          : in std_logic;
 			avalon_write         : in std_logic;
 			avalon_writedata     : in std_logic_vector(31 downto 0);
+			avalon_waitrequest   : out std_logic;
 			in_interrupts        : in std_logic_vector(7 downto 0)
 		);
 	end component ServInterruptController;
@@ -141,6 +143,7 @@ begin
 			avalon_read => avalon_ic_read,
 			avalon_write => avalon_ic_write,
 			avalon_writedata => avalon_ic_writedata,
+			avalon_waitrequest => avalon_ic_waitrequest,
 			in_interrupts => interrupts
 		);
 

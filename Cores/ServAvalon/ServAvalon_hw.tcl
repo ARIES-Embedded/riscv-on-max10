@@ -228,6 +228,7 @@ set_interface_property interrupt_controller SVD_ADDRESS_GROUP ""
 
 add_interface_port interrupt_controller avalon_ic_readdata readdata Output 32
 add_interface_port interrupt_controller avalon_ic_readdatavalid readdatavalid Output 1
+add_interface_port interrupt_controller avalon_ic_waitrequest waitrequest Output 1
 add_interface_port interrupt_controller avalon_ic_read read Input 1
 add_interface_port interrupt_controller avalon_ic_write write Input 1
 add_interface_port interrupt_controller avalon_ic_writedata writedata Input 32

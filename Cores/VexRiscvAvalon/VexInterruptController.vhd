@@ -21,7 +21,8 @@ entity VexInterruptController is
 		avalon_writedata : in std_logic_vector(31 downto 0);
 		avalon_read : in std_logic;
 		avalon_readdata : out std_logic_vector(31 downto 0);
-		avalon_readdatavalid : out std_logic
+		avalon_readdatavalid : out std_logic;
+		avalon_waitrequest : out std_logic
 	);
 end entity VexInterruptController;
 
@@ -48,7 +49,6 @@ architecture rtl of VexInterruptController is
 
 	-- signals
 	signal interrupt_pending : std_logic_vector(31 downto 0);
-	signal read_bounce : std_logic;
 	-- registers
 	signal interrupt_enable  : std_logic_vector(31 downto 0) := x"00000000";
 	signal mtime             : std_logic_vector(63 downto 0) := x"0000000000000000";
@@ -78,7 +78,7 @@ begin
 					when others => null;
 				end case;
 			end if;
-			if (avalon_read = '1' and read_bounce = '0') then
+			if (avalon_read = '1') then
 				case avalon_address is
 					when "0000" => avalon_readdata <= interrupt_pending;
 					when "0001" => avalon_readdata <= interrupt_enable;
@@ -93,10 +93,8 @@ begin
 					when "1001" => avalon_readdata <= interrupt_soft;
 					when others => avalon_readdata <= x"00000000";
 				end case;
-				read_bounce <= '1';
 				avalon_readdatavalid <= '1';
 			else
-				read_bounce <= '0';
 				avalon_readdatavalid <= '0';
 			end if;
 
@@ -112,10 +110,12 @@ begin
 		end if;
 
 	end process;
-
+	
+	avalon_waitrequest <= '0';
 	interrupt_pending <= irq_source;
 	ext_irq <= '0' when (interrupt_pending and interrupt_enable) = x"00000000" else '1';
 	tmr_irq <= '0' when (unsigned(mtime) < unsigned(mtimecmp)) else '1';
 	sft_irq <= '0' when interrupt_soft = x"00000000" else '1';
+
 
 end architecture rtl;

@@ -20,6 +20,7 @@ entity ServInterruptController is
 		avalon_read          : in std_logic;
 		avalon_write         : in std_logic;
 		avalon_writedata     : in std_logic_vector(31 downto 0);
+		avalon_waitrequest   : out std_logic;
 		in_interrupts        : in std_logic_vector(7 downto 0)
 	);
 end entity ServInterruptController;
@@ -38,7 +39,6 @@ end entity ServInterruptController;
 architecture rtl of ServInterruptController is
 
 	signal interrupt : std_logic := '0';
-	signal read_bounce : std_logic := '0';
 
 	signal interrupt_enable : std_logic_vector(2 downto 0) := (others => '0');
 	signal interrupt_pending : std_logic_vector(2 downto 0) := (others => '0');
@@ -77,7 +77,7 @@ begin
 
 			end if;
 
-			if (avalon_read = '1' and read_bounce = '0') then
+			if (avalon_read = '1') then
 
 				-- all non implemented bits during read are set to 0
 				avalon_readdata <= x"00000000";
@@ -102,10 +102,8 @@ begin
 					when "1000" => avalon_readdata(0) <= interrupt_pending(0);
 					when others => avalon_readdata <= x"00000000";
 				end case;
-				read_bounce <= '1';
 				avalon_readdatavalid <= '1';
 			else
-				read_bounce <= '0';
 				avalon_readdatavalid <= '0';
 			end if;
 
@@ -123,6 +121,8 @@ begin
 		end if;
 
 	end process;
+
+	avalon_waitrequest <= '0';
 
 	interrupt_pending(1) <= '0' when (unsigned(mtime) < unsigned(mtimecmp)) else '1';
 	interrupt_pending(2) <= '0' when (in_interrupts and ext_interrupt_enable) = "00000000" else '1';

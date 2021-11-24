@@ -243,6 +243,7 @@ add_interface_port irq_controller ic_avalon_writedata writedata Input 32
 add_interface_port irq_controller ic_avalon_read read Input 1
 add_interface_port irq_controller ic_avalon_readdata readdata Output 32
 add_interface_port irq_controller ic_avalon_readdatavalid readdatavalid Output 1
+add_interface_port irq_controller ic_avalon_waitrequest waitrequest Output 1
 set_interface_assignment irq_controller embeddedsw.configuration.isFlash 0
 set_interface_assignment irq_controller embeddedsw.configuration.isMemoryDevice 0
 set_interface_assignment irq_controller embeddedsw.configuration.isNonVolatileStorage 0

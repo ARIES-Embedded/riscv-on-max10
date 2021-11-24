@@ -60,6 +60,7 @@ entity VexRiscvAvalon is
 		ic_avalon_read : in std_logic;
 		ic_avalon_readdata : out std_logic_vector(31 downto 0);
 		ic_avalon_readdatavalid : out std_logic;
+		ic_avalon_waitrequest : out std_logic;
 		irq_source : in std_logic_vector (31 downto 0)
 
 	);
@@ -88,7 +89,8 @@ architecture rtl of VexRiscvAvalon is
 			avalon_writedata : in std_logic_vector(31 downto 0);
 			avalon_read : in std_logic;
 			avalon_readdata : out std_logic_vector(31 downto 0);
-			avalon_readdatavalid : out std_logic
+			avalon_readdatavalid : out std_logic;
+			avalon_waitrequest : out std_logic
 		);
 	end component VexInterruptController;
 
@@ -341,7 +343,8 @@ begin
 			avalon_writedata => ic_avalon_writedata,
 			avalon_read => ic_avalon_read,
 			avalon_readdata => ic_avalon_readdata,
-			avalon_readdatavalid => ic_avalon_readdatavalid
+			avalon_readdatavalid => ic_avalon_readdatavalid,
+			avalon_waitrequest => ic_avalon_waitrequest
 		);
 
 	r0 : if CORE_CONFIG = 0 generate
