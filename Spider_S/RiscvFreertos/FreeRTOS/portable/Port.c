@@ -112,7 +112,7 @@ uintptr_t SystemInterruptHandler(uintptr_t stack) {
 		StoreStackPointerInCurrentTCB(stack);
 	}
 
-	if (l_LastIRQYield) {
+	if (l_LastTimerValue && l_LastIRQYield) {
 		l_LastIRQYield = false;
 		Hal_TimerStart(l_LastTimerValue);
 		vTaskSwitchContext();
