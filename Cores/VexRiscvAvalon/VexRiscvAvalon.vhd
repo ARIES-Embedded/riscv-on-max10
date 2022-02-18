@@ -2,9 +2,6 @@
 -- Different configurations can be selected via Qsys parameter
 -- Includes utime counter
 
--- TODO: forward reset and exception vector to each component
--- TODO: enable IO (uncached) memory region per Qsys parameter
-
 -- (0) RV32I
 -- (1) RV32IM
 -- (2) RV32IM, Caches
@@ -93,9 +90,6 @@ architecture rtl of VexRiscvAvalon is
 			avalon_waitrequest : out std_logic
 		);
 	end component VexInterruptController;
-
-	-- This code stinks, but works...
-	-- Are there simpler ways to instantiate exactly one component of multiple similar ones determined by generic?
 
 	component VexRiscvAvalon_0 is
 		generic (
