@@ -58,7 +58,7 @@ entity VexRiscvAvalon is
 		iBusAvalon_waitRequestn  : in  std_logic;
 		iBusAvalon_address       : out std_logic_vector(31 downto 0);
 		iBusAvalon_burstCount    : out std_logic_vector( 3 downto 0);
-		iBusAvalon_response      : in  std_logic;
+		iBusAvalon_response      : in  std_logic_vector(1 downto 0);
 		iBusAvalon_readDataValid : in  std_logic;
 		iBusAvalon_readData      : in  std_logic_vector(31 downto 0);
 		dBusAvalon_read          : out std_logic;
@@ -68,7 +68,7 @@ entity VexRiscvAvalon is
 		dBusAvalon_burstCount    : out std_logic_vector( 3 downto 0);
 		dBusAvalon_byteEnable    : out std_logic_vector( 3 downto 0);
 		dBusAvalon_writeData     : out std_logic_vector(31 downto 0);
-		dBusAvalon_response      : in  std_logic;
+		dBusAvalon_response      : in  std_logic_vector(1 downto 0);
 		dBusAvalon_readDataValid : in  std_logic;
 		dBusAvalon_readData      : in  std_logic_vector(31 downto 0);
 
@@ -143,7 +143,7 @@ architecture rtl of VexRiscvAvalon is
 			iBusAvalon_read          : out std_logic;
 			iBusAvalon_waitRequestn  : in  std_logic;
 			iBusAvalon_address       : out std_logic_vector(31 downto 0);
-			iBusAvalon_response      : in  std_logic;
+			iBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			iBusAvalon_readDataValid : in  std_logic;
 			iBusAvalon_readData      : in  std_logic_vector(31 downto 0);
 			dBusAvalon_read          : out std_logic;
@@ -152,7 +152,7 @@ architecture rtl of VexRiscvAvalon is
 			dBusAvalon_address       : out std_logic_vector(31 downto 0);
 			dBusAvalon_byteEnable    : out std_logic_vector( 3 downto 0);
 			dBusAvalon_writeData     : out std_logic_vector(31 downto 0);
-			dBusAvalon_response      : in  std_logic;
+			dBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			dBusAvalon_readDataValid : in  std_logic;
 			dBusAvalon_readData      : in  std_logic_vector(31 downto 0)
 		);
@@ -188,7 +188,7 @@ architecture rtl of VexRiscvAvalon is
 			iBusAvalon_read          : out std_logic;
 			iBusAvalon_waitRequestn  : in  std_logic;
 			iBusAvalon_address       : out std_logic_vector(31 downto 0);
-			iBusAvalon_response      : in  std_logic;
+			iBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			iBusAvalon_readDataValid : in  std_logic;
 			iBusAvalon_readData      : in  std_logic_vector(31 downto 0);
 			dBusAvalon_read          : out std_logic;
@@ -197,7 +197,7 @@ architecture rtl of VexRiscvAvalon is
 			dBusAvalon_address       : out std_logic_vector(31 downto 0);
 			dBusAvalon_byteEnable    : out std_logic_vector( 3 downto 0);
 			dBusAvalon_writeData     : out std_logic_vector(31 downto 0);
-			dBusAvalon_response      : in  std_logic;
+			dBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			dBusAvalon_readDataValid : in  std_logic;
 			dBusAvalon_readData      : in  std_logic_vector(31 downto 0)
 		);
@@ -234,7 +234,7 @@ architecture rtl of VexRiscvAvalon is
 			iBusAvalon_waitRequestn  : in  std_logic;
 			iBusAvalon_address       : out std_logic_vector(31 downto 0);
 			iBusAvalon_burstCount    : out std_logic_vector( 3 downto 0);
-			iBusAvalon_response      : in  std_logic;
+			iBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			iBusAvalon_readDataValid : in  std_logic;
 			iBusAvalon_readData      : in  std_logic_vector(31 downto 0);
 			dBusAvalon_read          : out std_logic;
@@ -244,7 +244,7 @@ architecture rtl of VexRiscvAvalon is
 			dBusAvalon_burstCount    : out std_logic_vector( 3 downto 0);
 			dBusAvalon_byteEnable    : out std_logic_vector( 3 downto 0);
 			dBusAvalon_writeData     : out std_logic_vector(31 downto 0);
-			dBusAvalon_response      : in  std_logic;
+			dBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			dBusAvalon_readDataValid : in  std_logic;
 			dBusAvalon_readData      : in  std_logic_vector(31 downto 0)
 		);
@@ -281,7 +281,7 @@ architecture rtl of VexRiscvAvalon is
 			iBusAvalon_waitRequestn  : in  std_logic;
 			iBusAvalon_address       : out std_logic_vector(31 downto 0);
 			iBusAvalon_burstCount    : out std_logic_vector( 3 downto 0);
-			iBusAvalon_response      : in  std_logic;
+			iBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			iBusAvalon_readDataValid : in  std_logic;
 			iBusAvalon_readData      : in  std_logic_vector(31 downto 0);
 			dBusAvalon_read          : out std_logic;
@@ -291,7 +291,7 @@ architecture rtl of VexRiscvAvalon is
 			dBusAvalon_burstCount    : out std_logic_vector( 3 downto 0);
 			dBusAvalon_byteEnable    : out std_logic_vector( 3 downto 0);
 			dBusAvalon_writeData     : out std_logic_vector(31 downto 0);
-			dBusAvalon_response      : in  std_logic;
+			dBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			dBusAvalon_readDataValid : in  std_logic;
 			dBusAvalon_readData      : in  std_logic_vector(31 downto 0)
 		);
@@ -328,7 +328,7 @@ architecture rtl of VexRiscvAvalon is
 			iBusAvalon_waitRequestn  : in  std_logic;
 			iBusAvalon_address       : out std_logic_vector(31 downto 0);
 			iBusAvalon_burstCount    : out std_logic_vector( 3 downto 0);
-			iBusAvalon_response      : in  std_logic;
+			iBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			iBusAvalon_readDataValid : in  std_logic;
 			iBusAvalon_readData      : in  std_logic_vector(31 downto 0);
 			dBusAvalon_read          : out std_logic;
@@ -338,7 +338,7 @@ architecture rtl of VexRiscvAvalon is
 			dBusAvalon_burstCount    : out std_logic_vector( 3 downto 0);
 			dBusAvalon_byteEnable    : out std_logic_vector( 3 downto 0);
 			dBusAvalon_writeData     : out std_logic_vector(31 downto 0);
-			dBusAvalon_response      : in  std_logic;
+			dBusAvalon_response      : in  std_logic_vector(1 downto 0);
 			dBusAvalon_readDataValid : in  std_logic;
 			dBusAvalon_readData      : in  std_logic_vector(31 downto 0)
 		);

@@ -2,6 +2,96 @@
 // Component : VexRiscvAvalon
 // Git hash  : 68e704f3092be640aa92c876cf78702a83167f94
 
+`define EnvCtrlEnum_binary_sequential_type [0:0]
+`define EnvCtrlEnum_binary_sequential_NONE 1'b0
+`define EnvCtrlEnum_binary_sequential_XRET 1'b1
+
+`define BranchCtrlEnum_binary_sequential_type [1:0]
+`define BranchCtrlEnum_binary_sequential_INC 2'b00
+`define BranchCtrlEnum_binary_sequential_B 2'b01
+`define BranchCtrlEnum_binary_sequential_JAL 2'b10
+`define BranchCtrlEnum_binary_sequential_JALR 2'b11
+
+`define FpuOpcode_binary_sequential_type [3:0]
+`define FpuOpcode_binary_sequential_LOAD 4'b0000
+`define FpuOpcode_binary_sequential_STORE 4'b0001
+`define FpuOpcode_binary_sequential_MUL 4'b0010
+`define FpuOpcode_binary_sequential_ADD 4'b0011
+`define FpuOpcode_binary_sequential_FMA 4'b0100
+`define FpuOpcode_binary_sequential_I2F 4'b0101
+`define FpuOpcode_binary_sequential_F2I 4'b0110
+`define FpuOpcode_binary_sequential_CMP 4'b0111
+`define FpuOpcode_binary_sequential_DIV 4'b1000
+`define FpuOpcode_binary_sequential_SQRT 4'b1001
+`define FpuOpcode_binary_sequential_MIN_MAX 4'b1010
+`define FpuOpcode_binary_sequential_SGNJ 4'b1011
+`define FpuOpcode_binary_sequential_FMV_X_W 4'b1100
+`define FpuOpcode_binary_sequential_FMV_W_X 4'b1101
+`define FpuOpcode_binary_sequential_FCLASS 4'b1110
+`define FpuOpcode_binary_sequential_FCVT_X_X 4'b1111
+
+`define ShiftCtrlEnum_binary_sequential_type [1:0]
+`define ShiftCtrlEnum_binary_sequential_DISABLE_1 2'b00
+`define ShiftCtrlEnum_binary_sequential_SLL_1 2'b01
+`define ShiftCtrlEnum_binary_sequential_SRL_1 2'b10
+`define ShiftCtrlEnum_binary_sequential_SRA_1 2'b11
+
+`define AluBitwiseCtrlEnum_binary_sequential_type [1:0]
+`define AluBitwiseCtrlEnum_binary_sequential_XOR_1 2'b00
+`define AluBitwiseCtrlEnum_binary_sequential_OR_1 2'b01
+`define AluBitwiseCtrlEnum_binary_sequential_AND_1 2'b10
+
+`define Src2CtrlEnum_binary_sequential_type [1:0]
+`define Src2CtrlEnum_binary_sequential_RS 2'b00
+`define Src2CtrlEnum_binary_sequential_IMI 2'b01
+`define Src2CtrlEnum_binary_sequential_IMS 2'b10
+`define Src2CtrlEnum_binary_sequential_PC 2'b11
+
+`define AluCtrlEnum_binary_sequential_type [1:0]
+`define AluCtrlEnum_binary_sequential_ADD_SUB 2'b00
+`define AluCtrlEnum_binary_sequential_SLT_SLTU 2'b01
+`define AluCtrlEnum_binary_sequential_BITWISE 2'b10
+
+`define Src1CtrlEnum_binary_sequential_type [1:0]
+`define Src1CtrlEnum_binary_sequential_RS 2'b00
+`define Src1CtrlEnum_binary_sequential_IMU 2'b01
+`define Src1CtrlEnum_binary_sequential_PC_INCREMENT 2'b10
+`define Src1CtrlEnum_binary_sequential_URS1 2'b11
+
+`define FpuFormat_binary_sequential_type [0:0]
+`define FpuFormat_binary_sequential_FLOAT 1'b0
+`define FpuFormat_binary_sequential_DOUBLE 1'b1
+
+`define FpuRoundMode_opt_type [2:0]
+`define FpuRoundMode_opt_RNE 3'b000
+`define FpuRoundMode_opt_RTZ 3'b001
+`define FpuRoundMode_opt_RDN 3'b010
+`define FpuRoundMode_opt_RUP 3'b011
+`define FpuRoundMode_opt_RMM 3'b100
+
+`define Response_binary_sequential_type [1:0]
+`define Response_binary_sequential_OKAY 2'b00
+`define Response_binary_sequential_RESERVED 2'b01
+`define Response_binary_sequential_SLAVEERROR 2'b10
+`define Response_binary_sequential_DECODEERROR 2'b11
+
+`define JtagState_binary_sequential_type [3:0]
+`define JtagState_binary_sequential_RESET 4'b0000
+`define JtagState_binary_sequential_IDLE 4'b0001
+`define JtagState_binary_sequential_IR_SELECT 4'b0010
+`define JtagState_binary_sequential_IR_CAPTURE 4'b0011
+`define JtagState_binary_sequential_IR_SHIFT 4'b0100
+`define JtagState_binary_sequential_IR_EXIT1 4'b0101
+`define JtagState_binary_sequential_IR_PAUSE 4'b0110
+`define JtagState_binary_sequential_IR_EXIT2 4'b0111
+`define JtagState_binary_sequential_IR_UPDATE 4'b1000
+`define JtagState_binary_sequential_DR_SELECT 4'b1001
+`define JtagState_binary_sequential_DR_CAPTURE 4'b1010
+`define JtagState_binary_sequential_DR_SHIFT 4'b1011
+`define JtagState_binary_sequential_DR_EXIT1 4'b1100
+`define JtagState_binary_sequential_DR_PAUSE 4'b1101
+`define JtagState_binary_sequential_DR_EXIT2 4'b1110
+`define JtagState_binary_sequential_DR_UPDATE 4'b1111
 
 `define EnvCtrlEnum_binary_sequential_type [0:0]
 `define EnvCtrlEnum_binary_sequential_NONE 1'b0
